@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class AdminTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Super admin + one demo staff member with limited permissions.
      */
     public function run(): void
     {
@@ -19,6 +19,18 @@ class AdminTableSeeder extends Seeder
                 'password' => 'password',
                 'status' => true,
                 'is_super_admin' => true,
+                'permissions' => [],
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'staff@example.com'],
+            [
+                'name' => 'Demo Staff',
+                'password' => 'password',
+                'status' => true,
+                'is_super_admin' => false,
+                'permissions' => ['orders', 'products', 'inventory'],
             ]
         );
     }
