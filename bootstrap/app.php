@@ -22,6 +22,11 @@ return Application::configure(basePath: dirname(__DIR__))
                 ->name('customer.')
                 ->group(base_path('routes/customer.php'));
 
+            // Maintenance page for hosting without a terminal: no session / DB on purpose
+            Route::prefix('system')
+                ->name('system.')
+                ->group(base_path('routes/system.php'));
+
             // Gateway callbacks: no session / CSRF on purpose
             Route::middleware(SubstituteBindings::class)
                 ->prefix('payment')

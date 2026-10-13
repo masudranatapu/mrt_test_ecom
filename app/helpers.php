@@ -10,6 +10,18 @@ if (! function_exists('money')) {
     }
 }
 
+if (! function_exists('system_key_valid')) {
+    /**
+     * Whether the given key unlocks the /system maintenance page.
+     */
+    function system_key_valid(mixed $key): bool
+    {
+        $secret = (string) config('system.key');
+
+        return strlen($secret) >= 16 && is_string($key) && hash_equals($secret, $key);
+    }
+}
+
 if (! function_exists('setting')) {
     /**
      * Site setting from the admin "Contact & Store Info" page.
